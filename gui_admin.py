@@ -10,48 +10,84 @@ class AdminApp(tk.Tk):
         self.store = store
         self.auth = auth
 
-        # Style hiện đại
-        style = ttk.Style()
-        style.configure("Treeview.Heading", background="#333", foreground="white", font=("Segoe UI", 11, "bold"))
-        style.configure("Treeview", background="#2b2b2b", foreground="white", fieldbackground="#2b2b2b", rowheight=28)
-        style.configure("Accent.TButton", foreground="white", background="#ff6600", font=("Segoe UI", 11, "bold"))
+        # Style hiện đại cho ttk
+        style = ttk.Style(self)
+        style.theme_use('default')
 
-        self._build()
-        self._load()
+        # Treeview style (nền tối)
+        style.configure("Treeview",
+                        background="#2b2b2b",
+                        foreground="white",
+                        fieldbackground="#2b2b2b",
+                        rowheight=28,
+                        borderwidth=0)
+        style.configure("Treeview.Heading",
+                        background="#333",
+                        foreground="white",
+                        font=("Segoe UI", 11, "bold"),
+                        borderwidth=0)
+        style.map("Treeview.Heading",
+                  background=[('active', '#3a3a3a')])
 
-    def _build(self):
-        ttk.Label(self, text="📋 Danh sách sản phẩm", font=("Segoe UI", 16, "bold"),
-                  background="#1e1e1e", foreground="white").pack(pady=10)
+        # Button style
+        style.configure("Accent.TButton",
+                        foreground="white",
+                        background="#ff6600",
+                        font=("Segoe UI", 11, "bold"),
+                        borderwidth=0)
+        style.map("Accent.TButton",
+                  background=[('active', '#ff7a1a')])
+
+        # Các frame chính dùng tk.Frame để dễ set background
+        container = tk.Frame(self, bg="#1e1e1e")
+        container.pack(fill="both", expand=True)
+
+        header = tk.Frame(container, bg="#1e1e1e")
+        header.pack(fill="x", pady=(10, 0))
+        tk.Label(header, text="📋 Danh sách sản phẩm",
+                 bg="#1e1e1e", fg="white", font=("Segoe UI", 16, "bold")).pack(pady=10)
 
         # Bảng sản phẩm
-        self.tree = ttk.Treeview(self, columns=("MA_VOT","TEN_VOT","GIA_BAN"), show="headings", height=15)
+        tree_frame = tk.Frame(container, bg="#1e1e1e")
+        tree_frame.pack(fill="x", padx=20)
+        self.tree = ttk.Treeview(tree_frame, columns=("MA_VOT","TEN_VOT","GIA_BAN"),
+                                 show="headings", height=15, style="Treeview")
         self.tree.heading("MA_VOT", text="Mã vợt")
         self.tree.heading("TEN_VOT", text="Tên vợt")
         self.tree.heading("GIA_BAN", text="Giá bán (VNĐ)")
         self.tree.column("MA_VOT", width=120, anchor="center")
         self.tree.column("TEN_VOT", width=560, anchor="w")
         self.tree.column("GIA_BAN", width=180, anchor="e")
-        self.tree.pack(padx=20, pady=10, fill="x")
+        self.tree.pack(padx=0, pady=10, fill="x")
         self.tree.bind("<<TreeviewSelect>>", self._on_select)
 
-        # Khung nhập liệu
-        frm = ttk.LabelFrame(self, text="Thông tin vợt", padding=10)
+        # Khung nhập liệu: dùng tk.LabelFrame với nền tối và border nhỏ
+        frm = tk.LabelFrame(container, text="Thông tin vợt", bg="#1e1e1e",
+                            fg="white", bd=0, font=("Segoe UI", 10))
         frm.pack(padx=20, pady=10, fill="x")
-        ttk.Label(frm, text="Mã vợt:", width=15).grid(row=0, column=0, sticky="w")
+
+        # Dùng tk.Label để dễ set màu nền/foreground
+        tk.Label(frm, text="Mã vợt:", width=15, bg="#1e1e1e", fg="white", anchor="w").grid(row=0, column=0, sticky="w", padx=4, pady=6)
         self.ent_ma = ttk.Entry(frm, width=30); self.ent_ma.grid(row=0, column=1, padx=5, pady=5)
-        ttk.Label(frm, text="Tên vợt:", width=15).grid(row=1, column=0, sticky="w")
+        tk.Label(frm, text="Tên vợt:", width=15, bg="#1e1e1e", fg="white", anchor="w").grid(row=1, column=0, sticky="w", padx=4, pady=6)
         self.ent_ten = ttk.Entry(frm, width=60); self.ent_ten.grid(row=1, column=1, padx=5, pady=5)
-        ttk.Label(frm, text="Giá bán:", width=15).grid(row=2, column=0, sticky="w")
+        tk.Label(frm, text="Giá bán:", width=15, bg="#1e1e1e", fg="white", anchor="w").grid(row=2, column=0, sticky="w", padx=4, pady=6)
         self.ent_gia = ttk.Entry(frm, width=20); self.ent_gia.grid(row=2, column=1, padx=5, pady=5, sticky="w")
 
-        # Nút chức năng
-        btns = ttk.Frame(self); btns.pack(pady=10)
+        # Nút chức năng: đặt vào frame có cùng nền
+        btns = tk.Frame(container, bg="#1e1e1e")
+        btns.pack(pady=10)
         if self.auth.can("create"):
             ttk.Button(btns, text="➕ Thêm", width=15, command=self._add, style="Accent.TButton").pack(side="left", padx=10)
         if self.auth.can("update"):
             ttk.Button(btns, text="✏️ Sửa", width=15, command=self._update, style="Accent.TButton").pack(side="left", padx=10)
         if self.auth.can("delete"):
             ttk.Button(btns, text="🗑️ Xóa", width=15, command=self._delete, style="Accent.TButton").pack(side="left", padx=10)
+
+        # Loại bỏ viền mặc định của một số widget (nếu cần)
+        self.configure(highlightthickness=0)
+
+        self._load()
 
     def _load(self):
         self.tree.delete(*self.tree.get_children())

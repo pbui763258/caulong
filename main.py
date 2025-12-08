@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from PIL import Image, ImageTk
 from store import JsonStore
 from auth import Auth
 from gui_admin import AdminApp
@@ -23,19 +22,12 @@ class LoginWindow(tk.Tk):
         main_frame = ttk.Frame(self)
         main_frame.pack(expand=True)
 
-        # Logo + tiêu đề
+        # Tiêu đề (không dùng ảnh)
         top = ttk.Frame(main_frame)
         top.grid(row=0, column=0, pady=(15, 5))
 
-        try:
-            img = Image.open("1.png").resize((100, 100))
-            self.logo = ImageTk.PhotoImage(img)
-            ttk.Label(top, image=self.logo).grid(row=0, column=0, pady=5)
-        except:
-            ttk.Label(top, text="[Logo không tìm thấy]", font=("Segoe UI", 10, "italic")).grid(row=0, column=0, pady=5)
-
-        ttk.Label(top, text="DT CREATIVE HOUSE", font=("Segoe UI", 12, "bold")).grid(row=1, column=0, pady=2)
-        ttk.Label(top, text="Đăng nhập hệ thống", font=("Segoe UI", 14)).grid(row=2, column=0, pady=5)
+        ttk.Label(top, text="DT CREATIVE HOUSE", font=("Segoe UI", 12, "bold")).grid(row=0, column=0, pady=5)
+        ttk.Label(top, text="Đăng nhập hệ thống", font=("Segoe UI", 14)).grid(row=1, column=0, pady=5)
 
         # Khung đăng nhập
         frm = ttk.LabelFrame(main_frame, text="Thông tin đăng nhập", padding=20)

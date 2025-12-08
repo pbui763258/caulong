@@ -1,0 +1,52 @@
+[
+  {
+    "MA_DH": "DH001",
+    "NGAY_DAT": "2025-11-20",
+    "TONG_TIEN": 5820000,
+    "TRANG_THAI_DH": "Đã giao",
+    "PHI_VAN_CHUYEN": 20000,
+    "khach_hang": {
+      "MA_KH": "KH001",
+      "HO_TEN": "Lê Minh Tuấn",
+      "SDT": "0903111222"
+    },
+    "nhan_vien_ban": {
+      "MA_NV": "NV002",
+      "HO_TEN": "Lý Thúy Vân"
+    },
+    "san_pham_dat": [
+      {
+        "MA_VOT": "VOT001",
+        "TEN_VOT": "Astrox 100 ZZ",
+        "SO_LUONG": 1,
+        "DON_GIA_BAN": 5800000,
+        "THANH_TIEN": 5800000
+      }
+    ]
+  },
+  {
+    "MA_DH": "DH002",
+    "NGAY_DAT": "2025-11-25",
+    "TONG_TIEN": 4500000,
+    "TRANG_THAI_DH": "Đang giao",
+    "PHI_VAN_CHUYEN": 0,
+    "khach_hang": {
+      "MA_KH": "KH002",
+      "HO_TEN": "Phạm Thu Hà",
+      "SDT": "0919333444"
+    },
+    "nhan_vien_ban": {
+      "MA_NV": "NV002",
+      "HO_TEN": "Lý Thúy Vân"
+    },
+    "san_pham_dat": [
+      {
+        "MA_VOT": "VOT003",
+        "TEN_VOT": "Auraspeed 90K",
+        "SO_LUONG": 1,
+        "DON_GIA_BAN": 4500000,
+        "THANH_TIEN": 4500000
+      }
+    ]
+  }
+]

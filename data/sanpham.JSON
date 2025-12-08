@@ -1,0 +1,34 @@
+[
+  {
+    "MA_VOT": "VOT003",
+    "TEN_VOT": "Auraspeed 90K",
+    "GIA_BAN": 4500000,
+    "MO_TA_KT": "Trọng lượng 3U, Cứng, Pyrofil",
+    "PHONG_CACH_CHOI": "Toàn diện",
+    "hang_san_xuat": {
+      "MA_HANG": "H002",
+      "TEN_HANG": "Victor"
+    },
+    "ton_kho": {
+      "SO_LUONG_TON": 8,
+      "NGUONG_CANH_BAO": 2,
+      "GIA_VON": 3500000
+    },
+    "danh_gia": []
+  },
+  {
+    "MA_VOT": "VOT002",
+    "TEN_VOT": "Jetspeed S 10",
+    "GIA_BAN": 3500000
+  },
+  {
+    "MA_VOT": "VOT004",
+    "TEN_VOT": "Jetspeed S 34",
+    "GIA_BAN": 4000000
+  },
+  {
+    "MA_VOT": "VOT004",
+    "TEN_VOT": "Calibar 900B00",
+    "GIA_BAN": 4900000
+  }
+]
